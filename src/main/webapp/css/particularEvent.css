@@ -1,0 +1,73 @@
+.ticket-category {
+  background-color: white;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.ticket-category button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.ticket-category input[type="number"] {
+  width: 50px;
+}
+
+/* Ticket Category styles */
+.ticket-category {
+  margin-bottom: 20px; /* Add margin between ticket category containers */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.ticket-category h3 {
+  font-size: 1.9rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: rgb(0, 0, 0);
+}
+
+/* Total Price Container styles */
+#totalPriceContainer {
+  width: 100%;
+  background-color: #262b27;
+  text-align: center;
+}
+
+#totalPriceContainer h3 {
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: #ddd;
+}
+
+/* Pay button styles */
+#payBtn {
+  font-size: 1.5rem;
+  padding: 10px 40px;
+  margin-top: 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  margin-bottom: 40px;
+}
+
+#payBtn:hover {
+  background-color: #28a745; /* Change color on hover */
+}
+
+#ticketCategories{
+    padding: 50px;
+    background-color: #262b27;
+    width: 100%;
+}
+
+.btn-minus {
+    background-color: red; /* Set background color of minus button to red */
+    color: white;
+}
+
+.btn-plus {
+    background-color: green; /* Set background color of plus button to green */
+    color: white;
+}

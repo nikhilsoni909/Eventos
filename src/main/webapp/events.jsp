@@ -125,8 +125,8 @@
            <div id="da-thumbs" class="da-thumbs portfolio">
     <c:forEach var="event" items="${events}">
         <div class="post-media pitem item-w1 item-h1 ${event.eventCategory}">
-            <a href="${event.eventBanner}" data-rel="prettyPhoto[gal]">
-                <img src="${event.getEventBanner()}" alt="" class="img-responsive">
+            <a href="EventDetailsServlet?eventId=${event.eventId}" >
+                <img src="${event.eventBanner}" alt="" class="img-responsive">
                 <div>
                     <h3>${event.eventName} <small>${event.eventCity}</small></h3>
                     <i class="flaticon-unlink"></i>

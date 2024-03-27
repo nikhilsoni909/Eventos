@@ -16,6 +16,12 @@ import eventos.utility.dbutil;
 public class EventsDAOImpl implements EventsDAOInterface {
      private Connection conn;
 	public EventsDAOImpl() {
+//		 try {
+//			conn = dbutil.provideConnection();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		 conn = dbutil.provideConnection();
 	}
     @Override
@@ -187,5 +193,30 @@ public class EventsDAOImpl implements EventsDAOInterface {
         }
         return events;
     }
+	@Override
+	public Events getEventDetailsByEventId(int eventId) throws SQLException  {
+		
+		System.out.println("getEventDetailsByEventId called");
+		    Events event = null;
+	        String query = "SELECT * FROM tbl_events WHERE event_id = ?";
+	        PreparedStatement statement = conn.prepareStatement(query);
+	        statement.setInt(1,eventId);
+	        ResultSet resultSet = statement.executeQuery();
+	        if (resultSet.next()) {
+                event = new Events();
+                event.setEventId(resultSet.getInt("event_id"));
+                event.setEventName(resultSet.getString("event_name"));
+                event.setEventVenue(resultSet.getString("event_venue"));
+                event.setEventCategory(resultSet.getString("event_category"));
+                event.setEventCity(resultSet.getString("event_city"));
+                event.setEventDateTime(resultSet.getTimestamp("event_date_time"));
+                event.setEventDescription(resultSet.getString("event_description"));
+                event.setEventBanner(resultSet.getString("event_banner"));
+                event.setOrganizerId(resultSet.getInt("organizer_id"));
+                System.out.println("data fetched to event object");
+            }
+	    	System.out.println("getEventDetailsByEventId ended");
+		return event;
+	}
   
 }

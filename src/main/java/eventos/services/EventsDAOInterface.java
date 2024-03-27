@@ -33,6 +33,6 @@ public interface EventsDAOInterface {
 	
    // this code is used for fetching events in customer's account
 	List<Events>  getAllEvents() throws Exception;
-
+    Events getEventDetailsByEventId(int eventId) throws Exception;
 
 }
