@@ -1,0 +1,147 @@
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 50%; /* Center the form vertically */
+    left: 50%; /* Center the form horizontally */
+    transform: translate(-50%, -50%); /* Center the form both vertically and horizontally */
+    border: 3px solid #f1f1f1;
+    border-radius: 20px;
+    z-index: 9;
+    background-color: white;
+    padding: 20px;
+    max-width: 500px;
+    height: 400px; /* Decrease the height */
+    overflow: auto; /* Add overflow for scrolling if necessary */
+  }
+  
+  /* Full-width input fields */
+  .form-popup input[type=text], .form-popup input[type=email], .form-popup input[type=tel], .form-popup input[type=date], .form-popup input[type=file], .form-popup textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* When the form container is clicked, close it */
+  .form-container {
+    max-width: 100%;
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    padding: 20px;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  
+  /* Set a style for the submit button */
+  .form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+
+  #Ah4{
+    font-size: 25px;
+    font-weight: 500;
+  }
+  
+
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  
+  /* Style for the button to open the form */
+  #openFormBtn {
+    background-color: #b32f0a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  #openEditProfileFormBtn {
+    background-color: #c9b023;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  #logoutBtn {
+    background-color: #d82929;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  /* Hover effect for the button */
+  #openFormBtn:hover {
+    background-color: #d4ad57;
+  }
+  
+  /* Event card styles */
+  .event-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 30px;
+      margin: 30px;
+      display: inline-block;
+      vertical-align: top;
+      width: 300px;
+      box-sizing: border-box;
+      text-align: left; /* Align text to the left */
+      position: relative;
+  }
+  
+  .event-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+  }
+  
+  .event-card p {
+      margin: 0; /* Remove default margins */
+  }
+  
+  .event-card button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+  }
+  
+  .event-card button:hover {
+      background-color: #d32f2f;
+  }
+  
+  /* Remove image display */
+  .event-card img {
+      display: none;
+  }
+
+  
