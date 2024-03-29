@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +20,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./css/particularEvent.css">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="./css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="css/custom.css">
 
     <!-- Modernizer for Portfolio -->
     <script src="js/modernizer.js"></script>
@@ -70,22 +72,28 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="message-box">
-                        <h2>EventName</h2>
-                        <h4>City, Date</h4>
-                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia officiis pariatur odio odit dolorem, sint ratione architecto delectus, tempore cupiditate reprehenderit, quae inventore quos quia! Quis, asperiores illo, dicta eligendi neque illum in ad hic consequatur ipsa eaque consequuntur blanditiis. Repudiandae quas laudantium pariatur? Commodi, distinctio. Laudantium error earum asperiores quo aut inventore aperiam sunt odio! Distinctio consequuntur molestiae accusamus in, labore cum corrupti officia sapiente, possimus assumenda debitis! Repellat?</p>
+                        <h2 class="red">${event.eventName}</h2>
+                        <h4>${event.eventCity},${event.eventVenue}</h4> 
+                        <h4>Date And Time:${event.eventDateTime}</h4>
+                        <p class="lead">${event.eventDescription}</p>
                         <button class="btn btn-primary button-40" role="button" id="powerBtn">Book Tickets</button> <br>
 
                     </div><!-- end messagebox -->
                 </div><!-- end col -->
                 <div class="col-md-6">
                     <div class="post-media wow fadeIn">
-                        <img src="uploads/particularEventImg.jpg" alt="" class="img-responsive img-rounded">
+                        <img src="${event.eventBanner}" alt="" class="img-responsive img-rounded">
                     </div><!-- end media -->
                 </div><!-- end col -->
             </div><!-- end row -->    
         </div><!-- end container -->
     </div><!-- end section -->
-
+<div class="card bg-warning text-dark text-center">
+    <div class="card-body">
+        <h4 class="card-title">Important Note:</h5>
+        <p class="card-text">Please note that you can only book one type of ticket at a time.</p>
+    </div>
+</div>
     <!-- Ticket Categories Container -->
     <div id="ticketCategories" class="container" style="display: none;">
 
@@ -163,8 +171,7 @@
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
     <script>
-        var prices = [100, 75, 50]; // Prices in rupees
-    
+      
         document.getElementById('powerBtn').addEventListener('click', function(event) {
     // Prevent default behavior of anchor links
     event.preventDefault();
@@ -173,69 +180,192 @@
     document.getElementById('ticketCategories').style.display = 'block';
     // Create ticket categories dynamically
     createTicketCategories();
-
+var total_quantity=0;
     // Smooth scroll to the ticket categories section
     document.getElementById('powerBtn').scrollIntoView({
         behavior: 'smooth'
     });
 });
 
-    
-        function createTicketCategories() {
-            var categories = ['Gold', 'Silver', 'Diamond'];
+      
+        
+
+        
+ function createTicketCategories() {    	
+            var ticketTypes = [
+                <c:forEach var="ticketType" items="${ticketTypes}">
+                    {
+                        ticketId: ${ticketType.ticketId},
+                        eventId: ${ticketType.eventId},
+                        ticketType: '${ticketType.ticketType}',
+                        ticketPrice: ${ticketType.ticketPrice},
+                        ticketQuantity: ${ticketType.ticketQuantity}
+                    }<c:if test="${!loop.last}">,</c:if>
+                </c:forEach>
+            ];
+            
+
             var container = document.getElementById('ticketCategories');
-            container.innerHTML = ''; // Clear previous content
-    
-            categories.forEach(function(category, index) {
+            container.innerHTML = '';
+
+            // Global variable to store the currently selected ticket type
+            var selectedTicketType = null;
+
+            // Iterate over each ticket type
+            ticketTypes.forEach(function(ticketType) {
+                // Create category container
                 var categoryContainer = document.createElement('div');
                 categoryContainer.classList.add('row', 'ticket-category');
-    
+
+                // Create category title element
                 var categoryTitle = document.createElement('div');
-                categoryTitle.classList.add('col-md-6');
-                categoryTitle.innerHTML = '<h3>' + category + '</h3>';
-    
+                categoryTitle.classList.add('col-md-3');
+                categoryTitle.innerHTML = '<h3>' + ticketType.ticketType + '</h3>';
+
+                // Create price element
                 var priceElement = document.createElement('div');
-                priceElement.classList.add('col-md-6', 'text-right');
-                priceElement.innerHTML = '<span class="font-weight-bold">₹' + prices[index] + '</span>';
-    
+                priceElement.classList.add('col-md-3', 'text-right');
+                priceElement.innerHTML = '<span class="font-weight-bold">₹' + ticketType.ticketPrice + '</span>';
+
+                // Create available element
+                var availableElement = document.createElement('div');
+                availableElement.classList.add('col-md-3', 'text-right');
+                availableElement.innerHTML = '<span class="font-weight-bold">Available: ' + ticketType.ticketQuantity + '</span>';
+
+                // Create buttons container
                 var buttonsContainer = document.createElement('div');
-                buttonsContainer.classList.add('col-md-6', 'text-right');
-    
+                buttonsContainer.classList.add('col-md-3', 'text-right');
+
+                // Create minus button
                 var minusButton = document.createElement('button');
-                minusButton.classList.add('btn', 'btn-secondary','btn-minus');
+                minusButton.classList.add('btn', 'btn-secondary', 'btn-minus');
                 minusButton.textContent = '-';
                 minusButton.addEventListener('click', function() {
-                    decreaseTickets(categoryContainer);
+                    decreaseTickets(ticketType);
                 });
-    
+
+                // Create ticket count input
                 var ticketCount = document.createElement('input');
                 ticketCount.type = 'number';
                 ticketCount.value = 0;
                 ticketCount.disabled = true;
-    
+
+                // Create plus button
                 var plusButton = document.createElement('button');
-                plusButton.classList.add('btn', 'btn-secondary','btn-plus');
+                plusButton.classList.add('btn', 'btn-secondary', 'btn-plus');
                 plusButton.textContent = '+';
                 plusButton.addEventListener('click', function() {
-                    increaseTickets(categoryContainer);
+                    increaseTickets(ticketType);
                 });
-    
+
                 // Append elements to category container
                 buttonsContainer.appendChild(minusButton);
                 buttonsContainer.appendChild(ticketCount);
                 buttonsContainer.appendChild(plusButton);
                 categoryContainer.appendChild(categoryTitle);
                 categoryContainer.appendChild(priceElement);
+                categoryContainer.appendChild(availableElement);
                 categoryContainer.appendChild(buttonsContainer);
-    
+
+                // Append category container to the main container
                 container.appendChild(categoryContainer);
             });
-    
+
             // Show total price container
             document.getElementById('totalPriceContainer').style.display = 'block';
-        }
+
+            // Function to decrease ticket quantity
+            function decreaseTickets(ticketType) {
+                var ticketCountInput = event.target.parentElement.querySelector('input[type="number"]');
+                var currentCount = parseInt(ticketCountInput.value);
+                if (currentCount > 0) {
+                    ticketCountInput.value = currentCount - 1;
+                    total_quantity= currentCount - 1;
+                    updateTotalPrice(ticketType.ticketPrice, -1);
+                }
+            }
+
+            // Function to increase ticket quantity
+            function increaseTickets(ticketType) {
+                var ticketCountInput = event.target.parentElement.querySelector('input[type="number"]');
+                var currentCount = parseInt(ticketCountInput.value);
+                if (currentCount < ticketType.ticketQuantity) {
+                    ticketCountInput.value = currentCount + 1;
+                    total_quantity= currentCount + 1;
+                    updateTotalPrice(ticketType.ticketPrice, 1);
+                }
+            }
+
+            // Function to update total price
+            function updateTotalPrice(ticketPrice, increment) {
+                var totalPriceElement = document.getElementById('totalPrice');
+                var currentPrice = parseFloat(totalPriceElement.textContent.slice(1)); // Remove '₹' symbol
+                var newPrice = currentPrice + (ticketPrice * increment);
+                totalPriceElement.textContent = '₹' + newPrice.toFixed(2);
+            }
+           //  Show total price container
+           document.getElementById('totalPriceContainer').style.display = 'block';
+           }
+        
+      //  previous code which  was static
+           // container.innerHTML = ''; // Clear previous content
     
-        var selectedCategory = '';
+         /* categories.forEach(function(category, index) {
+            	 var categoryContainer = document.createElement('div');
+                 categoryContainer.classList.add('row', 'ticket-category');
+     
+                 var categoryTitle = document.createElement('div');
+                 categoryTitle.classList.add('col-md-2');
+                 categoryTitle.innerHTML = '<h3>' + category + '</h3>';
+     
+                 var priceElement = document.createElement('div');
+                 priceElement.classList.add('col-md-2', 'text-right');
+                 priceElement.innerHTML = '<span class="font-weight-bold">₹' + prices[index] + '</span>';
+     
+                 var avilableElement = document.createElement('div');
+                 avilableElement.classList.add('col-md-2', 'text-right');
+                 avilableElement.innerHTML = '<span class="font-weight-bold">avilable: ' + avilable[index] + '</span>';
+                 
+                 var buttonsContainer = document.createElement('div');
+                 buttonsContainer.classList.add('col-md-6', 'text-right');
+     
+                 var minusButton = document.createElement('button');
+                 minusButton.classList.add('btn', 'btn-secondary','btn-minus');
+                 minusButton.textContent = '-';
+                 minusButton.addEventListener('click', function() {
+                     decreaseTickets(categoryContainer);
+                 });
+     
+                 var ticketCount = document.createElement('input');
+                 ticketCount.type = 'number';
+                 ticketCount.value = 0;
+                 ticketCount.disabled = true;
+     
+                 var plusButton = document.createElement('button');
+                 plusButton.classList.add('btn', 'btn-secondary','btn-plus');
+                 plusButton.textContent = '+';
+                 plusButton.addEventListener('click', function() {
+                     increaseTickets(categoryContainer);
+                 });
+     
+                 // Append elements to category container
+                 buttonsContainer.appendChild(minusButton);
+                 buttonsContainer.appendChild(ticketCount);
+                 buttonsContainer.appendChild(plusButton);
+                 categoryContainer.appendChild(categoryTitle);
+                 categoryContainer.appendChild(priceElement);
+                 categoryContainer.appendChild(avilableElement);
+                 categoryContainer.appendChild(buttonsContainer);
+     
+                 container.appendChild(categoryContainer);
+            });*/
+    
+            // Show total price container
+           // document.getElementById('totalPriceContainer').style.display = 'block';
+        
+       // }
+        
+   /*     var selectedCategory = '';
     
         function increaseTickets(categoryContainer) {
             if (selectedCategory !== categoryContainer) {
@@ -272,7 +402,8 @@
             });
             document.getElementById('totalPrice').textContent = '₹' + totalPrice;
         }
-    
+        */
+        
         document.getElementById('payBtn').addEventListener('click', function() {
             var totalPrice = document.getElementById('totalPrice').textContent;
             alert('Total amount to be paid: ' + totalPrice);

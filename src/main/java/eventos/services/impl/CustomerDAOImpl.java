@@ -109,7 +109,7 @@ public class CustomerDAOImpl implements CustomerDAOInterface {
 	}
 
 	@Override
-	public String isValidCredential(String organizer_email, String organizer_password) {
+	public String isValidCredential(String customer_email, String customer_password) {
 	    String status = "Login Denied! Incorrect Username or Password";
 	    boolean valid = false;
 
@@ -118,18 +118,18 @@ public class CustomerDAOImpl implements CustomerDAOInterface {
 	    ResultSet rs = null;
 
 	    try {
-	        ps = con.prepareStatement("SELECT * FROM tbl_organizers WHERE organizer_email=?");
-	        ps.setString(1, organizer_email);
+	        ps = con.prepareStatement("SELECT * FROM tbl_customers WHERE customer_email=?");
+	        ps.setString(1, customer_email);
 	        rs = ps.executeQuery();
 
 	        if(rs.next()) {
-	            String passwordHash = rs.getString("organizer_password_hash");
-	            String passwordSalt = rs.getString("organizer_password_salt");
+	            String passwordHash = rs.getString("customer_password_hash");
+	            String passwordSalt = rs.getString("customer_password_salt");
 
 	            System.out.println("Password Hash: " + passwordHash);
 	            System.out.println("Password Salt: " + passwordSalt);
 
-	            valid = PasswordDecryption.decryption(organizer_password, passwordHash, passwordSalt);
+	            valid = PasswordDecryption.decryption(customer_password, passwordHash, passwordSalt);
 
 	            if(valid) {
 	                status = "valid";
