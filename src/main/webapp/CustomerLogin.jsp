@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +23,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
@@ -38,9 +37,12 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
-<body>
+    
+    
 
+
+</head>
+<body>  
     <!-- LOADER -->
     <div id="preloader">
         <div class="loader">
@@ -55,61 +57,88 @@
     <!-- END LOADER -->
     
 	
-   <%@ include file="customerNavbar.jsp"%>
-
-   	<div class="banner-area banner-bg-1">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="banner">
-						<h2>Events</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <div id="portfolio" class="section wb">
-        <div class="container">
-            <div class="section-title text-center">
-                <h3>Book now</h3>
-                <p class="lead">Secure your spot now and be a part of the excitement! Book your tickets today for an unforgettable event experience.</p>
-            </div><!-- end title -->
-        </div><!-- end container -->
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="portfolio-filter text-center">
-                        <ul>
-                            <li><a class="btn btn-dark btn-radius btn-brd active" href="#" data-filter="*"><span class="oi hidden-xs" data-glyph="grid-three-up"></span> All</a></li>
-                            <li><a class="btn btn-dark btn-radius btn-brd" data-toggle="tooltip" data-placement="top" title="" href="#" data-filter=".cat1">Stand-up</a></li>
-                            <li><a class="btn btn-dark btn-radius btn-brd" href="#" data-toggle="tooltip" data-placement="top" title="" data-filter=".cat2">concerts</a></li>
-                            <li><a class="btn btn-dark btn-radius btn-brd" href="#" data-toggle="tooltip" data-placement="top" title="" data-filter=".cat3">Heritage Walks</a></li>
-                            <li><a class="btn btn-dark btn-radius btn-brd" href="#" data-toggle="tooltip" data-placement="top" title="" data-filter=".cat4">Others</a></li>
-                        </ul>
-                    </nav>
+    <header class="header header_style_01">
+        <nav class="megamenu navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand nigga" href="index.jsp"><h1 class="logotxt"><h1>Eventos</h1></h1></a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="GetAllEventsServlet">Events</a></li>
+                        <li><a href="about-us.jsp">About us</a></li>
+                        <li><a href="contact.jsp">Contact</a></li>
+                        <li><a class="active" href="CustomerLogin.jsp">Login</a></li>     
+                    </ul>
                 </div>
             </div>
+        </nav>
+    </header>
 
-            <hr class="invis">
 
-           <div id="da-thumbs" class="da-thumbs portfolio">
-    <c:forEach var="event" items="${events}">
-        <div class="post-media pitem item-w1 item-h1 ${event.eventCategory}">
-            <a href="EventDetailsServlet?eventId=${event.eventId}" >
-                <img src="${event.eventBanner}" alt="" class="img-responsive">
-                <div>
-                    <h3>${event.eventName} <small>${event.eventCity}</small></h3>
-                    <i class="flaticon-unlink"></i>
-                </div>
-            </a>
-        </div>
-    </c:forEach>
-</div>
+    
+    
+   
+    <div class="login1"><img src="uploads/login1.webp" alt="" class="loginimg">
+        <div class="wrapper">
+            <h2>Sign in</h2>
+            <form action="CustomerLogin" method="post">
+              <!-- <div class="input-box">
+                <input type="text" placeholder="Enter your name" required>
+              </div> -->
+              <div class="input-box">
+                <input type="text" id="Email" name="Email" placeholder="Email" required>
+              </div>
+               <div class="input-box">
+                <input type="password" id="Password" name="Password" placeholder="Password" required>
+              </div>
+              <!-- <div class="input-box">
+                <input type="password" placeholder="Confirm password" required>
+              </div>  -->
+              <!-- <div class="policy">
+                <input type="checkbox">
+                <h3> <br>I accept all terms & condition</h3>
+              </div> -->
+              <div class="input-box button">
+                <input type="Submit" value="Login">
+              </div>
+              <div class="text">
+                <h3>Do not have an account? <a href="CustomerRegister.jsp">Register now</a></h3>
+              </div>
+            </form>
+          </div> 
+    </div> <br><br><br>
+
+    <div id="about" class="section wb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="message-box">
+                        <h4>Want to list your event?</h4>
+                        <h2>Organization Login</h2>
+                        <p class="lead">As an organization, unlock the full potential of our platform by registering and logging in to seamlessly list your events and manage ticket sales. Whether you're hosting conferences, workshops, or social gatherings, our user-friendly interface empowers you to showcase your events with ease.
+                        </p>
+
+                        <a href="organizerLogin.html"><button class="button-40" role="button">Login</button></a>
+                    </div><!-- end messagebox -->
+                </div><!-- end col -->
+
+                
+            </div><!-- end row -->
+
+            
+            </div><!-- end row -->
+        </div><!-- end container -->
     </div><!-- end section -->
-	
-	
+
+
 
     <footer class="footer">
         <div class="container">
@@ -131,11 +160,11 @@
                         </div>
 
                         <ul class="footer-links hov">
-                            <li><a href="/index.jsp">Home <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="about-us.html">About <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="events.html">Events <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="contact.html">Contact <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="login.html">Login <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="index.jsp">Home <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="about-us.jsp">About <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="GetAllEventsServlet">Events <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="contact.jsp">Contact <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="CustomerLogin.jsp">Login <span class="icon icon-arrow-right2"></span></a></li>
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
@@ -152,11 +181,16 @@
 								<input placeholder="Subscribe our newsletter.." name="search">
 								<i class="fa fa-envelope-o"></i>
 							</form>
+
 						</div>                        
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
             </div><!-- end row -->
+            <!-- <div class="organreg">
+              <a href="login2.html"><h4>Login as an Organization</h4></a>
+            </div> -->
         </div><!-- end container -->
+        
     </footer><!-- end footer -->
 
     <div class="copyrights">
@@ -181,4 +215,4 @@
     <script src="js/hoverdir.js"></script>    
 
 </body>
-</html>	
+</html>

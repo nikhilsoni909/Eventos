@@ -14,6 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Site Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,7 +23,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">  
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
@@ -53,81 +54,49 @@
     <!-- END LOADER -->
     
 	
-    <header class="header header_style_01">
-        <nav class="megamenu navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand nigga" href="./index.jsp"><h1 class="logotxt"><h1>Eventos</h1></h1></a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.jsp">Home</a></li>
-                        <li><a class="active" href="about-us.html">About us</a></li>
-                        <li><a href="GetAllEventsServlet">Events</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="userLogin.html">Login</a></li> 
-                        <!-- <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="features.html">Features</a></li>
-                        <li><a href="testimonials.html">Testimonials</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-						-->
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+   <%@ include file="customerNavbar.jsp"%>
 
-   	 <div id="about" class="section wb">
+   	
+
+    <div id="contact" class="section wb">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="message-box">
-                        <h4>About Us</h4>
-                        <h2>Welcome to Eventos</h2>
-                        <p class="lead">Welcome to Eventos, your premier destination for hassle-free event ticket booking. <br><br>
-                        With a vast array of entertainment options at your fingertips, we simplify the process of securing your spot at your favorite events. Our user-friendly platform, secure payment options, and dedicated customer support ensure a seamless experience from start to finish. Join us and embark on a journey filled with unforgettable experiences! </p>
-
-                        <button class="button-40" role="button">Book now!</button>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
-
-                <div class="col-md-6">
-                    <div class="post-media wow fadeIn">
-                        <img src="uploads/about_01.jpg" alt="" class="img-responsive img-rounded">
-                        <!-- <a href="http://www.youtube.com/watch?v=nrJtHemSPW4" data-rel="prettyPhoto[gal]" class="playbutton"><i class="flaticon-play-button"></i></a> -->
-                    </div><!-- end media -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-
-            <hr class="hr1"> 
+            <div class="section-title text-center">
+                <h3>Get in touch</h3>
+                <p class="lead">Get in touch with us! We're here to assist you every step of the way. Whether you have questions about our services, need help with an existing event listing, or just want to say hello, we'd love to hear from you.</p>
+            </div><!-- end title -->
 
             <div class="row">
-				<div class="col-md-6">
-                    <div class="post-media wow fadeIn">
-                        <img src="uploads/about_02.jpg" alt="" class="img-responsive img-rounded">
-                    </div><!-- end media -->
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="contact_form">
+                        <div id="message"></div>
+                        <form id="contactform" class="row" action="contact.php" name="contactform" method="post">
+                            <fieldset class="row-fluid">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Your Email">
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Your Phone">
+                                </div>
+                               
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <textarea class="form-control" name="comments" id="comments" rows="6" placeholder="Give us more details.."></textarea>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                                    <button class="button-40" role="button">Send</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div><!-- end col -->
-				
-                <div class="col-md-6">
-                    <div class="message-box">
-                        <h4>Who We are</h4>
-                        <h2>Why choose us?</h2>
-                        <p class="lead">Why Choose Us? At Eventos, we're not just a ticket booking platform; we're your ultimate gateway to unforgettable experiences. With a commitment to simplicity and convenience, we offer a seamless booking process. Our extensive selection of events caters to every taste, ensuring there's something for everyone. <br><br> Plus, with competitive pricing and exclusive deals, we guarantee exceptional value for every ticket purchased.</p>
-
-                        <button class="button-40" role="button">Events</button>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
-            </div><!-- end row -->
+            </div><!-- end row -->	
         </div><!-- end container -->
-    </div><!-- end section -->
-
-    
+    </div><!-- end section --> <br>
 
     <footer class="footer">
         <div class="container">
@@ -149,14 +118,14 @@
                         </div>
 
                         <ul class="footer-links hov">
-                            <li><a href="/index.jsp">Home <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="/index.html">Home <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="about-us.html">About <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="events.html">Events <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="contact.html">Contact <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="login.html">Login <span class="icon icon-arrow-right2"></span></a></li>
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
-                </div><!-- end col -->
+                </div><!-- end col --> 
 				
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="footer-distributed widget clearfix">

@@ -43,7 +43,16 @@ public class CustomerLoginServlet extends HttpServlet {
 				// valid user
 				
 				System.out.println("Sign in Succesful");
-
+				HttpSession session = request.getSession();
+				session.setAttribute("IsOrganizer", false);	
+				session.setAttribute("userRole","Customer");
+				session.setAttribute("customer_email",Email);
+				String customer_name=udao.getCustomerName(Email);
+				int customer_id=udao.getCustomerId(Email);
+				session.setAttribute("customer_name",customer_name);
+				session.setAttribute("customer_id",customer_id);
+				System.out.println(customer_name);
+				System.out.println(customer_id);
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 
 				rd.forward(request, response);
@@ -62,5 +71,3 @@ public class CustomerLoginServlet extends HttpServlet {
 
 
 }
-
-

@@ -15,8 +15,8 @@ public interface CustomerDAOInterface {
 	public boolean isRegistered(String emailId);
 
 	public String isValidCredential(String emailId, String password);
-//only emailId will be enough
-	public Customers getCustomerDetails(String emailId, String password);
 
+	public String getCustomerName(String emailId);
+	public int getCustomerId(String emailId);
 	
 }

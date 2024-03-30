@@ -1,0 +1,46 @@
+@charset "ISO-8859-1";
+/* Ticket card styles */
+.col-md-4 {
+    padding: 0 15px;
+}
+
+
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 16px
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.card-title {
+    margin-bottom: .75rem;
+    font-size: 1.9rem;
+    font-weight: bold;
+}
+
+.card-text {
+    margin-bottom: .5rem;
+}
+
+.card:last-child {
+    margin-right: 0;
+}
+
+.mb-4,
+.my-4 {
+    margin-bottom: 1.5rem !important;
+}

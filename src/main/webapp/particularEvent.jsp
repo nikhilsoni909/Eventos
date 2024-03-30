@@ -43,34 +43,7 @@
 </head>
 <body>
 
-	<header class="header header_style_01">
-		<nav class="megamenu navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand nigga" href="index.html"><h1
-							class="logotxt">
-							<h1>Eventos</h1>
-						</h1></a>
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a class="active" href="index.html">Home</a></li>
-						<li><a href="about-us.html">About us</a></li>
-						<li><a href="events.html">Events</a></li>
-						<li><a href="contact.html">Contact</a></li>
-						<li><a href="userLogin.html">Login</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+	   <%@ include file="customerNavbar.jsp"%>
 
 	<div id="about" class="section wb">
 		<div class="container">
@@ -113,7 +86,7 @@
 		</div>
 	</div>
 	<!-- Ticket Categories Container -->
-	<div id="ticketCategories" class="container" style="display: none;">
+	<div id="ticketCategories" class="container mx-auto justify-content-center" style=" display: none;">
 
 		<!-- Dynamic content will be added here -->
 	</div>
@@ -228,6 +201,7 @@
 	  var total_quantity=0;
       var total_amount=0;
       var final_ticket_type_id=0;
+      var  total_ticket_quantity=0;
         document.getElementById('powerBtn').addEventListener('click', function(event) {
     // Prevent default behavior of anchor links
     event.preventDefault();
@@ -273,8 +247,8 @@
             function createCategoryContainer(ticketType) {
                 // Create category container
                 var categoryContainer = document.createElement('div');
-                categoryContainer.classList.add('row', 'ticket-category');
-
+                categoryContainer.classList.add('row', 'ticket-category','justify-content-center');
+                categoryContainer.style.width = '100%'; 
                 // Create category title element
                 var categoryTitle = document.createElement('div');
                 categoryTitle.classList.add('col-md-3');
@@ -342,6 +316,7 @@
             // Function to decrease ticket quantity
             function decreaseTickets(ticketType) {
             	final_ticket_type_id=ticketType.ticketId;
+            	total_tickets_quantity=ticketType.ticketQuantity;
                 if (selectedTicketType !== ticketType) {
                     resetQuantityAndTotal();
                     selectedTicketType = ticketType;
@@ -363,6 +338,7 @@
             // Function to increase ticket quantity
             function increaseTickets(ticketType) {
             	final_ticket_type_id=ticketType.ticketId;
+            	total_tickets_quantity=ticketType.ticketQuantity;
                 if (selectedTicketType !== ticketType) {
                     resetQuantityAndTotal();
                     selectedTicketType = ticketType;
@@ -380,16 +356,18 @@
                 console.log(total_quantity);
                 console.log(total_amount);
                 console.log(final_ticket_type_id);
+               
             }
 
             // Function to update total price
             function updateTotalPrice(ticketPrice, increment,ticketId) {
+            	 console.log(total_tickets_quantity);
                 totalPrice += ticketPrice * increment;
                 total_amount=totalPrice;
                 totalPriceElement.textContent = '₹' + totalPrice.toFixed(2);
                //***** code to set the  attributes in the request .we are setting the href of pay button here
                 var payLink = document.getElementById('payLink');
-                payLink.href = "index.jsp?totalAmount="+total_amount+"&ticketQuantity="+total_quantity+"&ticketId="+ticketId+"&eventId="+${event.eventId};
+                payLink.href = "paymentPage.jsp?totalAmount="+total_amount+"&ticketQuantity="+total_quantity+"&ticketId="+ticketId+"&eventId="+${event.eventId};
             }
 
             // Create ticket categories

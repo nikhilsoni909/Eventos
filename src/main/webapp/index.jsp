@@ -48,34 +48,12 @@
 			<div class="loader__bar"></div>
 			<div class="loader__ball"></div>
 		</div>
-    </div><!-- end loader -->
+    </div>
     <!-- END LOADER -->
     
 	
-    <header class="header header_style_01">
-        <nav class="megamenu navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand nigga" href="index.jsp"><h1 class="logotxt"><h1>Eventos</h1></h1></a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a class="active" href="index.jsp">Home</a></li>
-                        <li><a href="about-us.html">About us</a></li>
-                        <li><a href="GetAllEventsServlet">Events</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="CustomerLogin.html">Login</a></li>     
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+     <%@ include file="customerNavbar.jsp"%>
+    
 	
 	<div class="slider-area">
 		<div class="slider-wrapper owl-carousel">
@@ -87,7 +65,7 @@
 								<h1 class="homepage-three-title">Booking <span>Tickets</span> made easy.</h1>
 								<h2>Experience the ease of booking tickets for your favorite events with just a few clicks. Say goodbye to hassle and hello to convenience. </h2>
 								<div class="slider-content-btn">
-									<a href="events.jsp"><button class="button-40" role="button">Book Now</button></a>
+									<button class="button-40" role="button">Book now!</button>
 								</div>
 							</div>
 						</div>
@@ -102,7 +80,7 @@
 								<h1 class="homepage-three-title">Simplify Your <span>Event</span> Plans</h1>
 								<h2>Unlock the simplicity of securing event tickets online. Discover, book, and enjoy with ease! </h2>
 								<div class="slider-content-btn">
-									<a href="events.jsp"><button class="button-40" role="button">Events</button></a>
+									<button class="button-40" role="button">Events</button>
 								</div>
 							</div>
 						</div>
@@ -117,8 +95,7 @@
 								<h1 class="homepage-three-title">Efficient <span>Ticket</span> Booking</h1>
 								<h2>Save time and energy with our streamlined ticketing system. Reserve your tickets effortlessly and focus on enjoying the event.</h2>
 								<div class="slider-content-btn">
-								<a href="events.jsp"><button class="button-40" role="button">Explore Now</button></a>
-									
+									<button class="button-40" role="button">Explore Now</button>
 								</div>
 							</div>
 						</div>
@@ -134,7 +111,7 @@
             <div class="row text-center">
                 <div class="col-md-6">
                     <div class="customwidget text-left">
-                        <h1>Hola Amigos!</h1>
+                        <h1>Hola Amigos! <%=session.getAttribute("customer_name") %></h1>
                         <p>Welcome to Eventos - Your Ticket to Unforgettable Experiences! Start booking now!</p>
                         <ul class="list-inline">
                             <li><i class="fa fa-check"></i> Effortless</li>
@@ -142,7 +119,7 @@
                             <li><i class="fa fa-check"></i> Fast</li>
                             <li><i class="fa fa-check"></i> Intuitive</li>
                         </ul><!-- end list -->
-                        <button class="button-40" role="button">Start Booking</button>
+                        <a href="GetAllEventsServlet"><button class="button-40" role="button">Start Booking</button></a>
                     </div> <br><br>
                 </div><!-- end col -->
 				<div class="col-md-6">
@@ -357,11 +334,11 @@
                         </div>
 
                         <ul class="footer-links hov">
-                            <li><a href="/index.jsp">Home <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="/index.html">Home <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="about-us.html">About <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="events.jsp">Events <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="events.html">Events <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="contact.html">Contact <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="CustomerLogin.html">Login <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="login.html">Login <span class="icon icon-arrow-right2"></span></a></li>
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
@@ -384,6 +361,8 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </footer><!-- end footer -->
+    
+    
 
     <div class="copyrights">
         <div class="container">
@@ -405,6 +384,7 @@
     <script src="js/custom.js"></script>
     <script src="js/portfolio.js"></script>
     <script src="js/hoverdir.js"></script>    
+
 
 </body>
 </html>

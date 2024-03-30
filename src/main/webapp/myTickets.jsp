@@ -1,144 +1,107 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.util.List"%>
+<%@page import="eventos.models.MyTicket"%>
+<%@page import="eventos.services.impl.TicketTypeDAOImpl"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
-
-    <!-- Basic -->
+<head>
+    <!-- Meta tags and other head content -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
-   
-    <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
- 
-     <!-- Site Metas -->
-    <title>Eventos</title>  
+    <title>Eventos - My Tickets</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="myTickets.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
-
     <!-- Modernizer for Portfolio -->
     <script src="js/modernizer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs2@1.0.0/qrcode.min.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    
-    
-
-
 </head>
 <body>  
+ <% 
+            TicketTypeDAOImpl myTicketsDAO = new TicketTypeDAOImpl();
+            int customerId = (int)session.getAttribute("customer_id"); // Replace with the actual customer ID
+            //int customerId=100;
+            List<MyTicket> myTicketsList = null;
+            try {
+                myTicketsList = myTicketsDAO.getMyTickets(customerId);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+         
+        %>
     <!-- LOADER -->
     <div id="preloader">
         <div class="loader">
-			<div class="loader__bar"></div>
-			<div class="loader__bar"></div>
-			<div class="loader__bar"></div>
-			<div class="loader__bar"></div>
-			<div class="loader__bar"></div>
-			<div class="loader__ball"></div>
-		</div>
+            <div class="loader__bar"></div>
+            <div class="loader__bar"></div>
+            <div class="loader__bar"></div>
+            <div class="loader__bar"></div>
+            <div class="loader__bar"></div>
+            <div class="loader__ball"></div>
+        </div>
     </div><!-- end loader -->
     <!-- END LOADER -->
-    
-	
-    <header class="header header_style_01">
-        <nav class="megamenu navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand nigga" href="index.jsp"><h1 class="logotxt"><h1>Eventos</h1></h1></a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.jsp">Home</a></li>
-                        <li><a href="about-us.html">About us</a></li>
-                        <li><a href="GetAllEventsServlet">Events</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a class="active" href="CustomerLogin.html">Login</a></li>     
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-
+      <%@ include file="customerNavbar.jsp"%>
     
     
-   
-    <div class="login1"><img src="uploads/login1.webp" alt="" class="loginimg">
-        <div class="wrapper">
-            <h2>Sign in</h2>
-            <form action="CustomerLogin" method="post">
-              <!-- <div class="input-box">
-                <input type="text" placeholder="Enter your name" required>
-              </div> -->
-              <div class="input-box">
-                <input type="text" id="Email" name="Email" placeholder="Email" required>
-              </div>
-               <div class="input-box">
-                <input type="password" id="Password" name="Password" placeholder="Password" required>
-              </div>
-              <!-- <div class="input-box">
-                <input type="password" placeholder="Confirm password" required>
-              </div>  -->
-              <!-- <div class="policy">
-                <input type="checkbox">
-                <h3> <br>I accept all terms & condition</h3>
-              </div> -->
-              <div class="input-box button">
-                <input type="Submit" value="Login">
-              </div>
-              <div class="text">
-                <h3>Do not have an account? <a href="CustomerRegister.jsp">Register now</a></h3>
-              </div>
-            </form>
-          </div> 
-    </div> <br><br><br>
-
-    <div id="about" class="section wb">
+    <div id="services" class="parallax section lb">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="message-box">
-                        <h4>Want to list your event?</h4>
-                        <h2>Organization Login</h2>
-                        <p class="lead">As an organization, unlock the full potential of our platform by registering and logging in to seamlessly list your events and manage ticket sales. Whether you're hosting conferences, workshops, or social gatherings, our user-friendly interface empowers you to showcase your events with ease.
-                        </p>
-
-                        <a href="organizerLogin.html"><button class="button-40" role="button">Login</button></a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
-
-                
-            </div><!-- end row -->
-
+            <div class="section-title text-center">
+                <h3>My Tickets</h3>
+            </div><!-- end title -->
+            <!-- Tickets Container -->
+            <div class="row" id="eventsContainer">
+               <% 
+               if (myTicketsList != null && !myTicketsList.isEmpty()) {
+            for (MyTicket ticket : myTicketsList) {
+    %>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <p class="card-text">Booking ID: <%= ticket.getTicketId() %></p>
+                <h4 class="card-title" style="min-height: 56px;">Event: <%= ticket.getEventName() %></h5>
+                <p class="card-text">Event Date : <%= ticket.getDate() %></p>
+                <p class="card-text">Booking Date : <%= ticket.getBookingDate()%></p>
+                <p class="card-text">City: <%= ticket.getCity() %></p>
+                <p class="card-text">Seat Category: <%= ticket.getSeatCategory() %></p>
+                <p class="card-text">Number of Seats: <%= ticket.getNumberOfSeats() %></p>
+            </div>
+        </div>
+    </div>
+    <% 
+            }
+        } else {
+    %>
+    <div class="col-md-12 text-center">
+        <h1 >No tickets found.</p>
+    </div>
+    <% } %>
+            </div> <br><br><br><br>
             
-            </div><!-- end row -->
+            <!-- End Tickets Container -->
         </div><!-- end container -->
     </div><!-- end section -->
-
-
 
     <footer class="footer">
         <div class="container">
@@ -160,11 +123,11 @@
                         </div>
 
                         <ul class="footer-links hov">
-                            <li><a href="/index.jsp">Home <span class="icon icon-arrow-right2"></span></a></li>
+                            <li><a href="/index.html">Home <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="about-us.html">About <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="GetAllEventsServlet">Events <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="events.html">Events <span class="icon icon-arrow-right2"></span></a></li>
 							<li><a href="contact.html">Contact <span class="icon icon-arrow-right2"></span></a></li>
-							<li><a href="CustomerLogin.html">Login <span class="icon icon-arrow-right2"></span></a></li>
+							<li><a href="login.html">Login <span class="icon icon-arrow-right2"></span></a></li>
                         </ul><!-- end links -->
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
@@ -181,16 +144,11 @@
 								<input placeholder="Subscribe our newsletter.." name="search">
 								<i class="fa fa-envelope-o"></i>
 							</form>
-
 						</div>                        
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
             </div><!-- end row -->
-            <!-- <div class="organreg">
-              <a href="login2.html"><h4>Login as an Organization</h4></a>
-            </div> -->
         </div><!-- end container -->
-        
     </footer><!-- end footer -->
 
     <div class="copyrights">
@@ -212,7 +170,10 @@
     <!-- ALL PLUGINS -->
     <script src="js/custom.js"></script>
     <script src="js/portfolio.js"></script>
-    <script src="js/hoverdir.js"></script>    
-
+    <script src="js/hoverdir.js"></script>  
+    
 </body>
+
+
+
 </html>
